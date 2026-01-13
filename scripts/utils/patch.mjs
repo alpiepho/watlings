@@ -29,6 +29,11 @@ const PATCH_REGEX = new RegExp(PATCH_REGEX_SOURCE, 'g');
 
 /** @param {string} patchString */
 export function parsePatch(patchString) {
+  // Normalize line endings (same as in patch function)
+  if (process.platform === 'win32' || patchString.includes('\r')) {
+    patchString = patchString.replace(/\r/g, '');
+  }
+  
   return [...patchString.matchAll(PATCH_REGEX)].map(({ groups }) => {
     const { srcRange, addLines, delLines } = groups;
 
@@ -44,8 +49,8 @@ export function parsePatch(patchString) {
  * @param {string} targetString 
  */
 export function patch(patchString, targetString) {
-  // Fix Windows inserting carriage returns
-  if (process.platform === 'win32') {
+  // Normalize line endings (handles files created on Windows even when running on Linux/Docker)
+  if (patchString.includes('\r') || targetString.includes('\r')) {
     targetString = targetString.replace(/\r/g, '');
     patchString = patchString.replace(/\r/g, '');
   }

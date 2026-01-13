@@ -225,9 +225,20 @@ compiled 1 file
   · num is not 42
 ----------------
 Some tests failed!
+
+$ docker compose run --rm watlings npm run show 001_hello
+Try adding this to file 001_hello.wat:
+
+on line 17:
+    (call $log_num (i32.const 42))
+
+$ docker compose run --rm watlings npm run solve 001_hello
+Patch applied successfully to: 001_hello
 ```
 
-The tests fail as expected (exercise not completed), confirming the Docker environment works correctly.
+All commands work correctly. Fixes were applied to [scripts/utils/patch.mjs](../scripts/utils/patch.mjs) to handle Windows line endings (CRLF) when running in Docker:
+- `parsePatch()` now normalizes line endings before parsing to fix the `show` command
+- `patch()` now detects and normalizes line endings regardless of platform (not just on Windows) to fix the `solve` command when running on Linux/Docker
 
 All Docker files are located in the `with_docker/` directory:
 
