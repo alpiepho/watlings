@@ -20,15 +20,15 @@
   (type $point (struct (field $x i32) (field $y i32)))
 
   (func $make_point (param $x i32) (param $y i32) (result (ref $point))
-    ;; TODO: create and return a new point
+    (struct.new $point (local.get $x) (local.get $y))
   )
 
   (func $get_x (param $p (ref $point)) (result i32)
-    ;; TODO: return the x field
+    (struct.get $point $x (local.get $p))
   )
 
   (func $get_y (param $p (ref $point)) (result i32)
-    ;; TODO: return the y field
+    (struct.get $point $y (local.get $p))
   )
 
   (export "makePoint" (func $make_point))

@@ -22,7 +22,11 @@
 
   ;; do not edit the header
   (func $double_int (param $num i32) (result i32)
-    ;; TODO: double the value using double_float
+    (i32.trunc_f32_s 
+      (call $double_float 
+        (f32.convert_i32_s (local.get $num))
+      )
+    )
   )
 
   (export "doubleInt" (func $double_int))

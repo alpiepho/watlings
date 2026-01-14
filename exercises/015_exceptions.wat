@@ -24,7 +24,16 @@
   (tag $div_error (param i32))
 
   (func $safe_div (param $a i32) (param $b i32) (result i32)
-    ;; TODO: return a/b, or throw+catch error 400 if b is zero
+    (block $caught (result i32)
+      (try_table (result i32) (catch $div_error $caught)
+        ;; throw if b is zero
+        (if (i32.eqz (local.get $b))
+          (then (throw $div_error (i32.const 400)))
+        )
+        ;; otherwise return a / b
+        (i32.div_s (local.get $a) (local.get $b))
+      )
+    )
   )
 
   (export "safeDiv" (func $safe_div))

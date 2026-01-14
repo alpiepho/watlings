@@ -21,7 +21,16 @@
   (memory (export "memory") 1)
 
   (func $sum_lanes (result i32)
-    ;; TODO: load v128 from offset 0, extract all 4 lanes and add them
+    (i32.add
+      (i32.add
+        (i32x4.extract_lane 0 (v128.load (i32.const 0)))
+        (i32x4.extract_lane 1 (v128.load (i32.const 0)))
+      )
+      (i32.add
+        (i32x4.extract_lane 2 (v128.load (i32.const 0)))
+        (i32x4.extract_lane 3 (v128.load (i32.const 0)))
+      )
+    )
   )
 
   (export "sumLanes" (func $sum_lanes))

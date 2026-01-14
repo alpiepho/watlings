@@ -57,8 +57,13 @@
   )
 
   (func (export "getNum") (param $num i32) (result i32)
-    ;; TODO:
-    ;; return 42 if even, 100 if odd
+    (select (i32.const 42) (i32.const 100) (call $is_even (local.get $num)))
+    ;; OR
+    ;; (if (result i32)
+    ;;   (call $is_even (local.get $num))
+    ;;   (then (i32.const 42))
+    ;;   (else (i32.const 100))
+    ;; )
   )
 
   (export "isEven" (func $is_even))
