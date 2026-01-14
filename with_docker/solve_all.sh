@@ -29,6 +29,7 @@ docker compose run --rm watlings npm start 008_loops
 docker compose run --rm watlings npm start 009_data
 docker compose run --rm watlings npm start 010_memory
 docker compose run --rm watlings npm start 011_host
+docker compose run --rm watlings node --experimental-wasm-exnref exercises/011_host.mjs
 docker compose run --rm watlings npm start 012_reftypes
 docker compose run --rm watlings npm start 013_table
 docker compose run --rm watlings npm start 014_memory_dynamic

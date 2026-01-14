@@ -8,11 +8,13 @@
 */
 
 import fs from "fs/promises";
+import { fileURLToPath } from "url";
 import { getWastParser } from "../scripts/utils/getWastParser.mjs";
 
 // parse WAT file to WASM and read it as Buffer
+const watFilePath = fileURLToPath(import.meta.url).replace(".mjs", ".wat");
 const wasmBytes = await getWastParser()
-  .then((parseWast) => parseWast(import.meta.url.replace("mjs", "wat")))
+  .then((parseWast) => parseWast(watFilePath))
   .then(() => fs.readFile("./.cache/011_host.wasm"));
 
 // The configuration object also allows has "maximum" and "shared"
