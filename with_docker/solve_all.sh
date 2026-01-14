@@ -10,7 +10,6 @@ docker compose run --rm watlings npm run solve 007_conditionals
 docker compose run --rm watlings npm run solve 008_loops
 docker compose run --rm watlings npm run solve 009_data
 docker compose run --rm watlings npm run solve 010_memory
-docker compose run --rm watlings npm run solve 011_host.mjs
 docker compose run --rm watlings npm run solve 011_host
 docker compose run --rm watlings npm run solve 012_reftypes
 docker compose run --rm watlings npm run solve 013_table
@@ -29,7 +28,6 @@ docker compose run --rm watlings npm start 007_conditionals
 docker compose run --rm watlings npm start 008_loops
 docker compose run --rm watlings npm start 009_data
 docker compose run --rm watlings npm start 010_memory
-docker compose run --rm watlings npm start 011_host.mjs
 docker compose run --rm watlings npm start 011_host
 docker compose run --rm watlings npm start 012_reftypes
 docker compose run --rm watlings npm start 013_table
